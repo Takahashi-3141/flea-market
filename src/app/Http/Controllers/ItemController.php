@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Auth;
-use App\Models\User;
+use App\Models\Purchase;
+//use App\Models\User
 
 class ItemController extends Controller
 {
@@ -13,7 +14,11 @@ class ItemController extends Controller
     public function index()
     {
         $items = Item::latest()->paginate(8);
-        return view('items.index', compact('items'));
+        $recommended = Item::latest()->take(4)->get(); // おすすめ商品（仮に最新4件）
+        $mylist = auth()->check() ? auth()->user()->mylists()->with('item')->get() : [];
+
+        return view('items.index', compact('recommended', 'mylist'));
+        // return view('items.index', compact('items'));
     }
 
     // マイリスト（お気に入り）

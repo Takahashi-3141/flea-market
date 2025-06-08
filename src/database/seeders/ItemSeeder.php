@@ -11,6 +11,7 @@ class ItemSeeder extends Seeder
     public function run(): void
     {
         Item::create([
+            'id'=> 1,
             'user_id' => 1,
             'item_category_id' => 1,
             'item_condition_id' => 1,
@@ -66,38 +67,38 @@ class ItemSeeder extends Seeder
         ]);
     }
 
-    Item::create([
-        'user_id' => 2,
-        'item_category_id' => 4,
-        'item_condition_id' => 2,
-        'name' => 'マイク',
-        'price' => 8000,
-        'description' => '高音質のレコーディング用マイク',
-        'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Music+Mic+4632231.jpg',
-        'bland' => 'サンプルブランド'
-    ]);
+    // Item::create([
+    //     'user_id' => 2,
+    //     'item_category_id' => 4,
+    //     'item_condition_id' => 2,
+    //     'name' => 'マイク',
+    //     'price' => 8000,
+    //     'description' => '高音質のレコーディング用マイク',
+    //     'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Music+Mic+4632231.jpg',
+    //     'bland' => 'サンプルブランド'
+    // ]);
 
 
-    Item::create([
-        'user_id' => 2,
-        'item_category_id' => 3,
-        'item_condition_id' => 2,
-        'name' => 'ショルダーバッグ',
-        'price' => 3500,
-        'description' => 'おしゃれなショルダーバッグ',
-        'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Purse+fashion+pocket.jpg',
-        'bland' => 'サンプルブランド'
-    ]);
+    // Item::create([
+    //     'user_id' => 2,
+    //     'item_category_id' => 3,
+    //     'item_condition_id' => 2,
+    //     'name' => 'ショルダーバッグ',
+    //     'price' => 3500,
+    //     'description' => 'おしゃれなショルダーバッグ',
+    //     'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Purse+fashion+pocket.jpg',
+    //     'bland' => 'サンプルブランド'
+    // ]);
 
-    Item::create([
-        'user_id' => 2,
-        'item_category_id' => 3,
-        'item_condition_id' => 2,
-        'name' => 'コーヒーミル',
-        'price' => 4000,
-        'description' => '手動のコーヒーミル',
-        'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Waitress+with+Coffee+Grinder.jpg',
-        'bland' => 'サンプルブランド'
-    ]);
+    // Item::create([
+    //     'user_id' => 2,
+    //     'item_category_id' => 3,
+    //     'item_condition_id' => 2,
+    //     'name' => 'コーヒーミル',
+    //     'price' => 4000,
+    //     'description' => '手動のコーヒーミル',
+    //     'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Waitress+with+Coffee+Grinder.jpg',
+    //     'bland' => 'サンプルブランド'
+    // ]);
 
 }

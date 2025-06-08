@@ -7,9 +7,9 @@ use App\Http\Controllers\MypageController;
 use App\Http\Controllers\AuthController;
 
 
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.process');
 
 // ログアウト（任意でPOSTでも可）
@@ -34,6 +34,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/mypage', [MypageController::class, 'mypage'])->name('user.mypage');
     Route::get('/mypage/profile', [MypageController::class, 'profile'])->name('user.profile');
     Route::post('/mypage/profile', [MypageController::class, 'profile_update'])->name('user.profile.update');
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/mypage/profile', [UserController::class, 'profile'])->name('user.profile');
+        Route::post('/mypage/profile', [UserController::class, 'profile_update'])->name('user.profile.update');
+    });
 
     // マイリスト
     Route::get('/mypage/mylist', [MypageController::class, 'mylist'])->name('user.mylist');

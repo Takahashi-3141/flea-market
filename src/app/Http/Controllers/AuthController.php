@@ -10,9 +10,25 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function register()
+    public function register(Request $request)
     {
         return view('auth.register');
+        $data = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+
+        Auth::login($user);
+
+        // 登録後、プロフィール設定ページへリダイレクト
+        return redirect()->route('user.profile');
     }
 
     public function store(Request $request)
@@ -32,7 +48,7 @@ class AuthController extends Controller
         return redirect()->route('items.index');
     }
 
-    public function login()
+    public function login(Request $request)
     {
         return view('auth.login');
     }
@@ -45,9 +61,18 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended(route('items.index'));
-        }
+            $request->session()->regenerate();
 
+            $user = Auth::user();
+
+            // 初回ログイン後のみプロフィール未登録ならプロフィール画面へ
+            if (is_null($user->address) || is_null($user->postcode)) {
+                return redirect()->route('user.profile');
+            }
+
+            // 通常ログイン後
+            return redirect()->route('items.index');
+        }
         return back()->withErrors(['login' => 'メールアドレスまたはパスワードが間違っています']);
     }
 }
